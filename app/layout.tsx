@@ -22,7 +22,8 @@ export default function RootLayout({
     <html lang="vi">
       <body className={`font-sans ${GeistSans.variable} ${GeistMono.variable}`}>
         <Suspense fallback={<div>Loading...</div>}>{children}</Suspense>
-        <Toaster position="top-right" richColors />
+
+        <Toaster position="top-right" className="top-20" richColors />
         <Analytics />
       </body>
     </html>

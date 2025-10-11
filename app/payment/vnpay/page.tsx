@@ -26,16 +26,9 @@ export default function CheckoutPage() {
     ],
   })
 
-  const handlePaymentComplete = (result: any) => {
-    console.log("✅ Payment completed:", result)
-    // Handle successful payment
-    // Navigate to success page or show success message
-  }
-
   const handlePaymentError = (error: string) => {
     console.error("❌ Payment error:", error)
-    // Handle payment error
-    // Show error message to user
+    // Handle payment error - could show a toast notification here
   }
 
   return (
@@ -43,7 +36,7 @@ export default function CheckoutPage() {
       <div className="mb-8">
         <h1 className="text-3xl font-bold mb-2">Thanh toán đơn hàng</h1>
         <p className="text-muted-foreground">
-          Hoàn tất thanh toán để xác nhận đơn hàng của bạn
+          Chọn phương thức thanh toán và hoàn tất đơn hàng
         </p>
       </div>
 
@@ -115,13 +108,12 @@ export default function CheckoutPage() {
             <CardHeader>
               <CardTitle>Chọn phương thức thanh toán</CardTitle>
               <p className="text-sm text-muted-foreground">
-                Vui lòng chọn phương thức thanh toán phù hợp với bạn
+                Sau khi chọn VNPay, bạn sẽ được chuyển đến cổng thanh toán
               </p>
             </CardHeader>
             <CardContent>
               <VNPaymentForm
                 order={order}
-                onPaymentComplete={handlePaymentComplete}
                 onPaymentError={handlePaymentError}
               />
             </CardContent>
