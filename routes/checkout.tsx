@@ -54,13 +54,9 @@ export function CheckoutPage() {
       total: finalTotal,
     })
 
-    toast.success("Đặt hàng thành công!", {
-      description: "Chúng tôi sẽ liên hệ với bạn sớm nhất để xác nhận đơn hàng",
-    })
-
-    clearCart()
     setIsSubmitting(false)
-    navigate({ to: "/" })
+    navigate({ to: "/payment/vnpay" })
+    console.log("Redirecting to payment gateway...")
   }
 
   if (items.length === 0) {

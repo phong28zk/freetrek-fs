@@ -9,6 +9,7 @@ import { NewsPage } from "@/routes/news"
 import { ContactPage } from "@/routes/contact"
 import { ProductDetailPage } from "@/routes/product-detail"
 import { CheckoutPage } from "@/routes/checkout"
+import { VNPayPage } from "@/routes/payment.vnpay"
 import { LoginPage } from "@/routes/account/login"
 import { RegisterPage } from "@/routes/account/register"
 import { AccountPage } from "@/routes/account"
@@ -87,6 +88,12 @@ const contactRoute = createRoute({
   component: ContactPage,
 })
 
+const vnpayRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: "/payment/vnpay",
+  component: VNPayPage,
+})
+
 // Create route tree
 export const routeTree = rootRoute.addChildren([
   indexRoute,
@@ -94,6 +101,7 @@ export const routeTree = rootRoute.addChildren([
   productsRoute,
   productDetailRoute,
   checkoutRoute,
+  vnpayRoute,
   accountRoute,
   loginRoute,
   registerRoute,
