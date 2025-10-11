@@ -27,7 +27,7 @@ function sortObject(obj: Record<string, any>): Record<string, any> {
 
   for (key in obj) {
     if (obj.hasOwnProperty(key)) {
-      str.push(encodeURIComponent(key));
+      str.push(key);
     }
   }
   str.sort();
@@ -99,16 +99,24 @@ export function createVNPayPaymentUrl(
  */
 export function verifyVNPayReturn(
   params: Record<string, any>,
+  secureHash: string,
   hashSecret: string
 ): boolean {
-  const secureHash = params.vnp_SecureHash;
-  delete params.vnp_SecureHash;
-  delete params.vnp_SecureHashType;
-
+  // Don't modify the original params object
   const sortedParams = sortObject(params);
   const signData = qs.stringify(sortedParams, { encode: false });
   const hmac = crypto.createHmac('sha512', hashSecret);
   const signed = hmac.update(Buffer.from(signData, 'utf-8')).digest('hex');
+
+  // Debug logging
+  console.log('🔐 Signature Verification Debug:', {
+    signDataLength: signData.length,
+    signDataPreview: signData.substring(0, 100) + '...',
+    calculatedHash: signed.substring(0, 20) + '...',
+    receivedHash: secureHash?.substring(0, 20) + '...',
+    matches: secureHash === signed,
+    paramCount: Object.keys(params).length,
+  });
 
   return secureHash === signed;
 }

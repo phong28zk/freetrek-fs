@@ -15,7 +15,7 @@ export async function GET(request: NextRequest) {
       vnp_Params[key] = value;
     });
 
-    const secureHash = vnp_Params['vnp_SecureHash'];
+    const secureHash = vnp_Params['vnp_SecureHash'] || '';
     const responseCode = vnp_Params['vnp_ResponseCode'];
     const orderId = vnp_Params['vnp_TxnRef'];
     const amount = vnp_Params['vnp_Amount'];
@@ -28,8 +28,21 @@ export async function GET(request: NextRequest) {
 
     const hashSecret = process.env.VNPAY_HASH_SECRET || '';
 
-    // Verify signature
-    const isValid = verifyVNPayReturn(vnp_Params, hashSecret);
+    // Log params before verification for debugging
+    console.log('📋 VNPay params received:', {
+      params: vnp_Params,
+      secureHashReceived: secureHash,
+    });
+
+    if (!hashSecret) {
+      console.error('❌ VNPAY_HASH_SECRET is not configured');
+      const errorUrl = new URL('/payment/vnpay/result', request.nextUrl.origin);
+      errorUrl.searchParams.set('vnp_ResponseCode', '99');
+      return NextResponse.redirect(errorUrl);
+    }
+
+    // Verify signature - pass secureHash separately
+    const isValid = verifyVNPayReturn(vnp_Params, secureHash, hashSecret);
 
     console.log('🔔 VNPay Return Callback:', {
       orderId,
@@ -42,6 +55,8 @@ export async function GET(request: NextRequest) {
     });
 
     if (isValid) {
+      console.log('✅ VNPay signature verified successfully');
+
       // Redirect to payment result page with query parameters
       const resultUrl = new URL('/payment/vnpay/result', request.nextUrl.origin);
       resultUrl.searchParams.set('vnp_ResponseCode', responseCode);
@@ -53,15 +68,21 @@ export async function GET(request: NextRequest) {
       return NextResponse.redirect(resultUrl);
     } else {
       // Invalid signature - redirect with error code 97
+      console.error('❌ VNPay signature verification failed');
+      console.error('This could be due to:');
+      console.error('1. Incorrect VNPAY_HASH_SECRET');
+      console.error('2. Parameter tampering');
+      console.error('3. Signature calculation mismatch');
+
       const resultUrl = new URL('/payment/vnpay/result', request.nextUrl.origin);
       resultUrl.searchParams.set('vnp_ResponseCode', '97');
       resultUrl.searchParams.set('vnp_TxnRef', orderId);
 
-      console.error('❌ VNPay signature verification failed');
       return NextResponse.redirect(resultUrl);
     }
   } catch (error) {
     console.error('❌ Error processing VNPay return:', error);
+    console.error('Error details:', error instanceof Error ? error.message : 'Unknown error');
 
     // Redirect to error page
     const errorUrl = new URL('/payment/vnpay/result', request.nextUrl.origin);
