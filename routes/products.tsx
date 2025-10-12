@@ -27,10 +27,29 @@ export function ProductsPage() {
 
   const categoryNames: Record<string, string> = {
     all: "Tất cả sản phẩm",
-    clothing: "Trang phục du lịch",
-    accessories: "Phụ kiện",
-    utilities: "Đồ du lịch tiện ích",
-    camping: "Đồ cắm trại",
+    ao: "Áo",
+    "ao-mua": "Áo mưa",
+    quan: "Quần",
+    mu: "Mũ & Nón bảo hiểm",
+    giay: "Giày",
+    kinh: "Kính",
+    "phu-kien-bao-ve": "Phụ kiện bảo vệ",
+    balo: "Balo",
+    tui: "Túi",
+    "binh-nuoc": "Bình nước",
+    "thung-chua": "Thùng chứa",
+    gay: "Gậy trekking",
+    "dung-cu": "Dụng cụ",
+    "dung-cu-nau-an": "Dụng cụ nấu ăn",
+    "do-trang-tri": "Đồ trang trí",
+    leu: "Lều",
+    tham: "Thảm",
+    "tui-ngu": "Túi ngủ",
+    nem: "Nệm hơi",
+    goi: "Gối",
+    ghe: "Ghế",
+    ban: "Bàn",
+    "xe-day": "Xe đẩy & Xe kéo",
   }
 
   const handleCategoryChange = (newCategory: string) => {

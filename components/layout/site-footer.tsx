@@ -37,31 +37,23 @@ export function SiteFooter() {
             <h3 className="font-semibold">Sản phẩm</h3>
             <ul className="space-y-2 text-sm text-muted-foreground">
               <li>
-                <Link to="/products" search={{ category: "clothing" }} className="hover:text-primary transition-colors">
-                  Trang phục du lịch
+                <Link to="/products" search={{ category: "ao" }} className="hover:text-primary transition-colors">
+                  Trang phục
                 </Link>
               </li>
               <li>
-                <Link
-                  to="/products"
-                  search={{ category: "accessories" }}
-                  className="hover:text-primary transition-colors"
-                >
-                  Phụ kiện
+                <Link to="/products" search={{ category: "balo" }} className="hover:text-primary transition-colors">
+                  Balo & Túi
                 </Link>
               </li>
               <li>
-                <Link
-                  to="/products"
-                  search={{ category: "utilities" }}
-                  className="hover:text-primary transition-colors"
-                >
-                  Đồ du lịch tiện ích
-                </Link>
-              </li>
-              <li>
-                <Link to="/products" search={{ category: "camping" }} className="hover:text-primary transition-colors">
+                <Link to="/products" search={{ category: "leu" }} className="hover:text-primary transition-colors">
                   Đồ cắm trại
+                </Link>
+              </li>
+              <li>
+                <Link to="/products" search={{ category: "kinh" }} className="hover:text-primary transition-colors">
+                  Phụ kiện
                 </Link>
               </li>
             </ul>

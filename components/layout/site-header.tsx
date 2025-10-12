@@ -25,7 +25,7 @@ export function SiteHeader() {
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
           <Link to="/" className="flex items-center gap-2">
-            <div className="text-2xl font-bold text-primary">freetrek.</div>
+            <img src="/image/Logo.png" alt="Freetrek" className="h-10 w-auto" />
           </Link>
 
           {/* Desktop Navigation */}
