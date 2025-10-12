@@ -6,9 +6,13 @@ import { Link } from "@tanstack/react-router"
 import { ArrowRight, Backpack, Tent, Shirt, Watch } from "lucide-react"
 import { AddToCartButton } from "@/components/cart/add-to-cart-button"
 import { mockProducts } from "@/lib/data/mock-products"
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel"
+import Autoplay from "embla-carousel-autoplay"
+import { useRef } from "react"
 
 export function HomePage() {
   const featuredProducts = mockProducts.slice(0, 4)
+  const plugin = useRef(Autoplay({ delay: 5000, stopOnInteraction: true }))
 
   const formatPrice = (price: number) => {
     return new Intl.NumberFormat("vi-VN", {
@@ -19,96 +23,179 @@ export function HomePage() {
 
   return (
     <div className="flex flex-col">
-      <section className="relative h-[600px] flex items-center justify-center text-white">
-        <div className="absolute inset-0 bg-gradient-to-b from-black/60 to-black/40 z-10" />
-        <img
-          src="/forest-mountain-hiking-trail-adventure.jpg"
-          alt="Freetrek Adventure"
-          className="absolute inset-0 w-full h-full object-cover"
-        />
-        <div className="relative z-20 container mx-auto px-4 text-center">
-          <h1 className="text-5xl md:text-7xl font-bold mb-6 text-balance">
-            Trang bị vững vàng
-            <br />
-            Tự do vững bước
-          </h1>
-          <p className="text-xl md:text-2xl mb-8 text-pretty max-w-2xl mx-auto">
-            Khám phá bộ sưu tập đồ du lịch và cắm trại chất lượng cao cho mọi hành trình
-          </p>
-          <div className="flex gap-4 justify-center">
-            <Button asChild size="lg" className="bg-accent hover:bg-accent/90 text-accent-foreground">
-              <Link to="/products">
-                Mua sắm ngay <ArrowRight className="ml-2 h-4 w-4" />
-              </Link>
-            </Button>
-            <Button
-              asChild
-              variant="outline"
-              size="lg"
-              className="bg-white/10 hover:bg-white/20 border-white text-white"
-            >
-              <Link to="/about">Tìm hiểu thêm</Link>
-            </Button>
-          </div>
-        </div>
+      <section className="relative">
+        <Carousel
+          plugins={[plugin.current]}
+          className="w-full"
+          opts={{
+            loop: true,
+          }}
+        >
+          <CarouselContent>
+            <CarouselItem>
+              <div className="relative h-[400px] md:h-[600px] lg:h-[800px]">
+                <img
+                  src="/image/Banner 1.png"
+                  alt="Khuyến mãi mở bán - Freetrek"
+                  className="w-full h-full object-cover object-center"
+                />
+              </div>
+            </CarouselItem>
+            <CarouselItem>
+              <div className="relative h-[400px] md:h-[600px] lg:h-[800px]">
+                <img
+                  src="/image/Banner 2.png"
+                  alt="Trang bị vững vàng - Tự do vững bước"
+                  className="w-full h-full object-cover object-center"
+                />
+              </div>
+            </CarouselItem>
+          </CarouselContent>
+          <CarouselPrevious className="left-4 size-10" />
+          <CarouselNext className="right-4 size-10" />
+        </Carousel>
       </section>
 
       <section className="py-16 bg-background">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">Danh mục sản phẩm</h2>
-            <p className="text-muted-foreground text-lg">Khám phá 4 nhóm sản phẩm chính của Freetrek</p>
+            <p className="text-muted-foreground text-lg">Khám phá các nhóm sản phẩm nổi bật của Freetrek</p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {/* Category 1: Travel Clothing */}
-            <Link to="/products" search={{ category: "clothing" }}>
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            {/* Lều */}
+            <Link to="/products" search={{ category: "leu" }}>
               <Card className="group hover:shadow-lg transition-all cursor-pointer h-full">
+                <div className="aspect-square overflow-hidden rounded-t-lg">
+                  <img
+                    src="/image/SP1-LỀU.png"
+                    alt="Lều"
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform"
+                  />
+                </div>
                 <CardHeader className="text-center">
-                  <div className="mx-auto mb-4 h-16 w-16 rounded-full bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
-                    <Shirt className="h-8 w-8 text-primary" />
-                  </div>
-                  <CardTitle>Trang phục du lịch</CardTitle>
-                  <CardDescription>Áo khoác, quần chống nước, áo giữ nhiệt</CardDescription>
+                  <CardTitle>Lều</CardTitle>
+                  <CardDescription>Lều cắm trại đa dạng</CardDescription>
                 </CardHeader>
               </Card>
             </Link>
 
-            {/* Category 2: Accessories */}
-            <Link to="/products" search={{ category: "accessories" }}>
+            {/* Áo chống nắng */}
+            <Link to="/products" search={{ category: "ao" }}>
               <Card className="group hover:shadow-lg transition-all cursor-pointer h-full">
+                <div className="aspect-square overflow-hidden rounded-t-lg">
+                  <img
+                    src="/image/SP2-ACN.png"
+                    alt="Áo chống nắng"
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform"
+                  />
+                </div>
                 <CardHeader className="text-center">
-                  <div className="mx-auto mb-4 h-16 w-16 rounded-full bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
-                    <Watch className="h-8 w-8 text-primary" />
-                  </div>
-                  <CardTitle>Phụ kiện</CardTitle>
-                  <CardDescription>Mũ, túi, găng tay, bình nước</CardDescription>
+                  <CardTitle>Áo chống nắng</CardTitle>
+                  <CardDescription>Áo, áo khoác du lịch</CardDescription>
                 </CardHeader>
               </Card>
             </Link>
 
-            {/* Category 3: Travel Utilities */}
-            <Link to="/products" search={{ category: "utilities" }}>
+            {/* Áo gió */}
+            <Link to="/products" search={{ category: "ao" }}>
               <Card className="group hover:shadow-lg transition-all cursor-pointer h-full">
+                <div className="aspect-square overflow-hidden rounded-t-lg">
+                  <img
+                    src="/image/SP3-ÁO GIÓ.png"
+                    alt="Áo gió"
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform"
+                  />
+                </div>
                 <CardHeader className="text-center">
-                  <div className="mx-auto mb-4 h-16 w-16 rounded-full bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
-                    <Backpack className="h-8 w-8 text-primary" />
-                  </div>
-                  <CardTitle>Đồ du lịch tiện ích</CardTitle>
-                  <CardDescription>Balo, túi đeo chéo, túi chống nước</CardDescription>
+                  <CardTitle>Áo khoác</CardTitle>
+                  <CardDescription>Áo gió, áo mưa</CardDescription>
                 </CardHeader>
               </Card>
             </Link>
 
-            {/* Category 4: Camping Gear */}
-            <Link to="/products" search={{ category: "camping" }}>
+            {/* Balo */}
+            <Link to="/products" search={{ category: "balo" }}>
               <Card className="group hover:shadow-lg transition-all cursor-pointer h-full">
+                <div className="aspect-square overflow-hidden rounded-t-lg">
+                  <img
+                    src="/image/SP4-BALO.png"
+                    alt="Balo"
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform"
+                  />
+                </div>
                 <CardHeader className="text-center">
-                  <div className="mx-auto mb-4 h-16 w-16 rounded-full bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
-                    <Tent className="h-8 w-8 text-primary" />
-                  </div>
-                  <CardTitle>Đồ cắm trại</CardTitle>
-                  <CardDescription>Lều, ghế xếp, bếp gas mini, dụng cụ nấu ăn</CardDescription>
+                  <CardTitle>Balo</CardTitle>
+                  <CardDescription>Balo leo núi, du lịch</CardDescription>
+                </CardHeader>
+              </Card>
+            </Link>
+
+            {/* Bình nước */}
+            <Link to="/products" search={{ category: "binh-nuoc" }}>
+              <Card className="group hover:shadow-lg transition-all cursor-pointer h-full">
+                <div className="aspect-square overflow-hidden rounded-t-lg">
+                  <img
+                    src="/image/SP5-Bình nước.png"
+                    alt="Bình nước"
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform"
+                  />
+                </div>
+                <CardHeader className="text-center">
+                  <CardTitle>Bình nước</CardTitle>
+                  <CardDescription>Bình giữ nhiệt, bình nước</CardDescription>
+                </CardHeader>
+              </Card>
+            </Link>
+
+            {/* Túi ngủ */}
+            <Link to="/products" search={{ category: "tui-ngu" }}>
+              <Card className="group hover:shadow-lg transition-all cursor-pointer h-full">
+                <div className="aspect-square overflow-hidden rounded-t-lg">
+                  <img
+                    src="/image/SP6-Túi ngủ.png"
+                    alt="Túi ngủ"
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform"
+                  />
+                </div>
+                <CardHeader className="text-center">
+                  <CardTitle>Túi ngủ</CardTitle>
+                  <CardDescription>Túi ngủ giữ ấm</CardDescription>
+                </CardHeader>
+              </Card>
+            </Link>
+
+            {/* Gối */}
+            <Link to="/products" search={{ category: "goi" }}>
+              <Card className="group hover:shadow-lg transition-all cursor-pointer h-full">
+                <div className="aspect-square overflow-hidden rounded-t-lg">
+                  <img
+                    src="/image/SP7-Gối.png"
+                    alt="Gối"
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform"
+                  />
+                </div>
+                <CardHeader className="text-center">
+                  <CardTitle>Gối</CardTitle>
+                  <CardDescription>Gối hơi du lịch</CardDescription>
+                </CardHeader>
+              </Card>
+            </Link>
+
+            {/* Ghế */}
+            <Link to="/products" search={{ category: "ghe" }}>
+              <Card className="group hover:shadow-lg transition-all cursor-pointer h-full">
+                <div className="aspect-square overflow-hidden rounded-t-lg">
+                  <img
+                    src="/image/SP8-GHẾ.png"
+                    alt="Ghế"
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform"
+                  />
+                </div>
+                <CardHeader className="text-center">
+                  <CardTitle>Ghế</CardTitle>
+                  <CardDescription>Ghế xếp dã ngoại</CardDescription>
                 </CardHeader>
               </Card>
             </Link>
@@ -124,7 +211,7 @@ export function HomePage() {
               <p className="text-muted-foreground">Những sản phẩm được yêu thích nhất</p>
             </div>
             <Button asChild variant="outline">
-              <Link to="/products">
+              <Link to="/products" search={{ category: "all" }}>
                 Xem tất cả <ArrowRight className="ml-2 h-4 w-4" />
               </Link>
             </Button>
@@ -163,7 +250,7 @@ export function HomePage() {
             Khám phá bộ sưu tập đầy đủ của chúng tôi và trang bị cho hành trình của bạn
           </p>
           <Button asChild size="lg" variant="secondary">
-            <Link to="/products">Khám phá ngay</Link>
+            <Link to="/products" search={{ category: "all" }}>Khám phá ngay</Link>
           </Button>
         </div>
       </section>
