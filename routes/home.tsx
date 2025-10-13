@@ -23,7 +23,7 @@ export function HomePage() {
 
   return (
     <div className="flex flex-col">
-      <section className="relative">
+      <section className="relative w-full overflow-hidden">
         <Carousel
           plugins={[plugin.current]}
           className="w-full"
@@ -33,20 +33,20 @@ export function HomePage() {
         >
           <CarouselContent>
             <CarouselItem>
-              <div className="relative h-[400px] md:h-[600px] lg:h-[800px]">
+              <div className="relative w-full aspect-video">
                 <img
                   src="/image/Banner 1.png"
                   alt="Khuyến mãi mở bán - Freetrek"
-                  className="w-full h-full object-cover object-center"
+                  className="w-full h-full object-contain bg-background"
                 />
               </div>
             </CarouselItem>
             <CarouselItem>
-              <div className="relative h-[400px] md:h-[600px] lg:h-[800px]">
+              <div className="relative w-full aspect-video">
                 <img
                   src="/image/Banner 2.png"
                   alt="Trang bị vững vàng - Tự do vững bước"
-                  className="w-full h-full object-cover object-center"
+                  className="w-full h-full object-contain bg-background"
                 />
               </div>
             </CarouselItem>
@@ -63,139 +63,71 @@ export function HomePage() {
             <p className="text-muted-foreground text-lg">Khám phá các nhóm sản phẩm nổi bật của Freetrek</p>
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-            {/* Lều */}
-            <Link to="/products" search={{ category: "leu" }}>
+          <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {/* Cắm trại */}
+            <Link to="/products" search={{ category: "cam-trai" }}>
               <Card className="group hover:shadow-lg transition-all cursor-pointer h-full">
                 <div className="aspect-square overflow-hidden rounded-t-lg">
                   <img
                     src="/image/SP1-LỀU.png"
-                    alt="Lều"
+                    alt="Cắm trại"
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform"
                   />
                 </div>
                 <CardHeader className="text-center">
-                  <CardTitle>Lều</CardTitle>
-                  <CardDescription>Lều cắm trại đa dạng</CardDescription>
+                  <CardTitle>Cắm trại</CardTitle>
+                  <CardDescription>Lều, túi ngủ, ghế, bàn xếp</CardDescription>
                 </CardHeader>
               </Card>
             </Link>
 
-            {/* Áo chống nắng */}
-            <Link to="/products" search={{ category: "ao" }}>
+            {/* Trang phục */}
+            <Link to="/products" search={{ category: "trang-phuc" }}>
               <Card className="group hover:shadow-lg transition-all cursor-pointer h-full">
                 <div className="aspect-square overflow-hidden rounded-t-lg">
                   <img
                     src="/image/SP2-ACN.png"
-                    alt="Áo chống nắng"
+                    alt="Trang phục"
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform"
                   />
                 </div>
                 <CardHeader className="text-center">
-                  <CardTitle>Áo chống nắng</CardTitle>
-                  <CardDescription>Áo, áo khoác du lịch</CardDescription>
+                  <CardTitle>Trang phục</CardTitle>
+                  <CardDescription>Áo, giày, mũ cho outdoor</CardDescription>
                 </CardHeader>
               </Card>
             </Link>
 
-            {/* Áo gió */}
-            <Link to="/products" search={{ category: "ao" }}>
-              <Card className="group hover:shadow-lg transition-all cursor-pointer h-full">
-                <div className="aspect-square overflow-hidden rounded-t-lg">
-                  <img
-                    src="/image/SP3-ÁO GIÓ.png"
-                    alt="Áo gió"
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform"
-                  />
-                </div>
-                <CardHeader className="text-center">
-                  <CardTitle>Áo khoác</CardTitle>
-                  <CardDescription>Áo gió, áo mưa</CardDescription>
-                </CardHeader>
-              </Card>
-            </Link>
-
-            {/* Balo */}
-            <Link to="/products" search={{ category: "balo" }}>
+            {/* Phụ kiện */}
+            <Link to="/products" search={{ category: "phu-kien" }}>
               <Card className="group hover:shadow-lg transition-all cursor-pointer h-full">
                 <div className="aspect-square overflow-hidden rounded-t-lg">
                   <img
                     src="/image/SP4-BALO.png"
-                    alt="Balo"
+                    alt="Phụ kiện"
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform"
                   />
                 </div>
                 <CardHeader className="text-center">
-                  <CardTitle>Balo</CardTitle>
-                  <CardDescription>Balo leo núi, du lịch</CardDescription>
+                  <CardTitle>Phụ kiện</CardTitle>
+                  <CardDescription>Balo, kính, găng tay</CardDescription>
                 </CardHeader>
               </Card>
             </Link>
 
-            {/* Bình nước */}
-            <Link to="/products" search={{ category: "binh-nuoc" }}>
+            {/* Đồ du lịch */}
+            <Link to="/products" search={{ category: "do-du-lich" }}>
               <Card className="group hover:shadow-lg transition-all cursor-pointer h-full">
                 <div className="aspect-square overflow-hidden rounded-t-lg">
                   <img
                     src="/image/SP5-Bình nước.png"
-                    alt="Bình nước"
+                    alt="Đồ du lịch"
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform"
                   />
                 </div>
                 <CardHeader className="text-center">
-                  <CardTitle>Bình nước</CardTitle>
-                  <CardDescription>Bình giữ nhiệt, bình nước</CardDescription>
-                </CardHeader>
-              </Card>
-            </Link>
-
-            {/* Túi ngủ */}
-            <Link to="/products" search={{ category: "tui-ngu" }}>
-              <Card className="group hover:shadow-lg transition-all cursor-pointer h-full">
-                <div className="aspect-square overflow-hidden rounded-t-lg">
-                  <img
-                    src="/image/SP6-Túi ngủ.png"
-                    alt="Túi ngủ"
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform"
-                  />
-                </div>
-                <CardHeader className="text-center">
-                  <CardTitle>Túi ngủ</CardTitle>
-                  <CardDescription>Túi ngủ giữ ấm</CardDescription>
-                </CardHeader>
-              </Card>
-            </Link>
-
-            {/* Gối */}
-            <Link to="/products" search={{ category: "goi" }}>
-              <Card className="group hover:shadow-lg transition-all cursor-pointer h-full">
-                <div className="aspect-square overflow-hidden rounded-t-lg">
-                  <img
-                    src="/image/SP7-Gối.png"
-                    alt="Gối"
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform"
-                  />
-                </div>
-                <CardHeader className="text-center">
-                  <CardTitle>Gối</CardTitle>
-                  <CardDescription>Gối hơi du lịch</CardDescription>
-                </CardHeader>
-              </Card>
-            </Link>
-
-            {/* Ghế */}
-            <Link to="/products" search={{ category: "ghe" }}>
-              <Card className="group hover:shadow-lg transition-all cursor-pointer h-full">
-                <div className="aspect-square overflow-hidden rounded-t-lg">
-                  <img
-                    src="/image/SP8-GHẾ.png"
-                    alt="Ghế"
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform"
-                  />
-                </div>
-                <CardHeader className="text-center">
-                  <CardTitle>Ghế</CardTitle>
-                  <CardDescription>Ghế xếp dã ngoại</CardDescription>
+                  <CardTitle>Đồ du lịch</CardTitle>
+                  <CardDescription>Bình nước, gậy leo núi, dụng cụ</CardDescription>
                 </CardHeader>
               </Card>
             </Link>
