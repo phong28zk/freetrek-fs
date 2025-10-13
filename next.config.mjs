@@ -7,7 +7,20 @@ const nextConfig = {
     ignoreBuildErrors: true,
   },
   images: {
-    domains: ["https://qr.1688.com"],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'qr.1688.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'detail.1688.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'pos.nvncdn.com',
+      },
+    ],
     unoptimized: true,
   },
 };
